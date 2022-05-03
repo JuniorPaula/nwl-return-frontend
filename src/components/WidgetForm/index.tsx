@@ -4,8 +4,9 @@ import { CloseButton } from '../CloseButton';
 import bugImage from '../assets/bug.svg';
 import ideaImage from '../assets/idea.svg';
 import thoughtImage from '../assets/thought.svg';
+import { FeadbackTypeStep } from './Steps/FeadbackTypeStep';
 
-const feadbackTypes = {
+export const feadbackTypes = {
   BUG: {
     title: 'Problemas',
     image: {
@@ -29,7 +30,7 @@ const feadbackTypes = {
   },
 };
 
-type FeadbackType = keyof typeof feadbackTypes;
+export type FeadbackType = keyof typeof feadbackTypes;
 
 export function Widgetform() {
   const [feadbackType, setFeadbackType] = useState<FeadbackType | null>(null);
@@ -42,20 +43,7 @@ export function Widgetform() {
       </header>
 
       {!feadbackType ? (
-        <div className="flex py-8 gap-2 w-full">
-          {Object.entries(feadbackTypes).map(([key, value]) => {
-            return (
-              <button
-                key={key}
-                className="bg-zinc-800 rounded-lg py-5 w-24 flex-1 flex flex-col items-center gap-2 border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:outline-none"
-                onClick={() => setFeadbackType(key as FeadbackType)}
-              >
-                <img src={value.image.source} alt={value.image.alt} />
-                <span>{value.title}</span>
-              </button>
-            );
-          })}
-        </div>
+        <FeadbackTypeStep onFeadbackTypeChanged={setFeadbackType} />
       ) : (
         <p>hello word</p>
       )}
