@@ -1,6 +1,8 @@
 import { ArrowLeft, Camera } from 'phosphor-react';
+import { useState } from 'react';
 import { FeadbackType, feadbackTypes } from '..';
 import { CloseButton } from '../../CloseButton';
+import { ScreeshotButton } from '../ScreenshotButton';
 
 interface FeadbackContentTypeStep {
   feadbacktype: FeadbackType;
@@ -11,6 +13,8 @@ export function FeadbackContentStep({
   feadbacktype,
   onFeadbackRestartRequested,
 }: FeadbackContentTypeStep) {
+  const [screenshot, setScreenshot] = useState<string | null>(null);
+
   const feadbackTypeInfo = feadbackTypes[feadbacktype];
 
   return (
@@ -42,12 +46,10 @@ export function FeadbackContentStep({
         ></textarea>
 
         <footer className="flex gap-2 mt-2">
-          <button
-            type="button"
-            className="p-2 bg-zinc-800 rounded-md border-transparent hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:border-brand-500"
-          >
-            <Camera className="w-6 h-6" />
-          </button>
+          <ScreeshotButton
+            screenshot={screenshot}
+            onScreenshotTook={setScreenshot}
+          />
 
           <button
             type="button"
