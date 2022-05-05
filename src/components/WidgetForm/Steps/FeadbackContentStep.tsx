@@ -7,11 +7,13 @@ import { ScreeshotButton } from '../ScreenshotButton';
 interface FeadbackContentTypeStep {
   feadbacktype: FeadbackType;
   onFeadbackRestartRequested: () => void;
+  onFeadbackSent: () => void;
 }
 
 export function FeadbackContentStep({
   feadbacktype,
   onFeadbackRestartRequested,
+  onFeadbackSent,
 }: FeadbackContentTypeStep) {
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [comment, setComment] = useState('');
@@ -21,6 +23,8 @@ export function FeadbackContentStep({
   function handleScreenshotFeadback(event: FormEvent) {
     event.preventDefault();
     console.log({ screenshot, comment });
+
+    onFeadbackSent();
   }
 
   return (
