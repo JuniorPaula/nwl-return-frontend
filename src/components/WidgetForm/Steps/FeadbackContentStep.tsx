@@ -1,4 +1,4 @@
-import { ArrowLeft, Camera } from 'phosphor-react';
+import { ArrowLeft } from 'phosphor-react';
 import { FormEvent, useState } from 'react';
 import { FeadbackType, feadbackTypes } from '..';
 import { api } from '../../../lib/api';
