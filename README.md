@@ -6,7 +6,7 @@
 
 Aplicação desenvolvida durante o evento da **Rockeseat NLW Return** .
 
-Esta é a parte do frontend. O usuário pode enviar os feadbacks e 0 disparo de email.
+Esta é a parte do frontend. O usuário pode enviar os feadbacks e disparos de emails.
 
 ### Instruções para rodar o projeto
 
@@ -30,7 +30,7 @@ npm run dev
 #### Utilizando a api com o frontend
 
 Fazer o clone do projeto **api backend** no repositório da api,  [repo do projeto](https://github.com/JuniorPaula/nlw-return-api).
-Siga as instruções de rodar o projeto que esão contidas no **README** para fazer a integração entre os dois projetos.
+Siga as instruções de rodar o projeto que estão contidas no **README** para fazer a integração entre os dois projetos.
 
 #### Tecnologias utilizadas
 - ReactJS
