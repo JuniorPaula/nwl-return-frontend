@@ -1,7 +1,9 @@
 import { ArrowLeft, Camera } from 'phosphor-react';
 import { FormEvent, useState } from 'react';
 import { FeadbackType, feadbackTypes } from '..';
+import { api } from '../../../lib/api';
 import { CloseButton } from '../../CloseButton';
+import { Loading } from '../Loading';
 import { ScreeshotButton } from '../ScreenshotButton';
 
 interface FeadbackContentTypeStep {
@@ -17,12 +19,22 @@ export function FeadbackContentStep({
 }: FeadbackContentTypeStep) {
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const [comment, setComment] = useState('');
+  const [isSendingFeadback, setIsSendingFeadback] = useState(false);
 
   const feadbackTypeInfo = feadbackTypes[feadbacktype];
 
-  function handleScreenshotFeadback(event: FormEvent) {
+  async function handleScreenshotFeadback(event: FormEvent) {
     event.preventDefault();
-    console.log({ screenshot, comment });
+
+    setIsSendingFeadback(true);
+
+    await api.post('/feadback', {
+      type: feadbacktype,
+      comment,
+      screenshot,
+    });
+
+    setIsSendingFeadback(false);
 
     onFeadbackSent();
   }
@@ -64,10 +76,10 @@ export function FeadbackContentStep({
 
           <button
             type="submit"
-            disabled={comment.length === 0}
+            disabled={comment.length === 0 || isSendingFeadback}
             className="p-2 bg-brand-500 rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:border-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"
           >
-            Enviar feadback
+            {isSendingFeadback ? <Loading /> : 'Enviar feadback'}
           </button>
         </footer>
       </form>
